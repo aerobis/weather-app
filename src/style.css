@@ -10,10 +10,12 @@ body{
 
 :root{
     --font-size-large: clamp(1.3rem, 2.1vw, 1.7rem);
+    --primary-color: #540d6e;
+    --secondary-color: #ee4266;
 }
 
 .header{
-    background-color: #540d6e;
+    background-color: var(--primary-color);
     grid-row: 1/1;
     display: flex;
     justify-content: center;
@@ -21,7 +23,23 @@ body{
     font-size: var(--font-size-large);
 }
 
+/*MAIN CONTENT*/
 .main-content{
-    background-color: #ee4266;
+    background-color: var(--secondary-color);
     grid-row: 2/5;
+    display: grid;
+    grid-template-rows: 1fr 5fr;
+}
+
+.select-section{
+    grid-row: 1/1;
+    background-color: var(--primary-color);
+}
+
+.select-section-content{
+    display: flex;
+    width: 100%;
+    flex-direction: row;
+    gap: 20px;
+    padding: 5px;
 }
