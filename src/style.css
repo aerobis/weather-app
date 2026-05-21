@@ -6,6 +6,7 @@ body{
     padding: 0;
     margin: 0;
     font-size: 16px;
+    overflow: hidden;
 }
 
 :root{
@@ -25,7 +26,7 @@ body{
 
 /*MAIN CONTENT*/
 .main-content{
-    background-color: var(--secondary-color);
+    background-color: var(--primary-color);
     grid-row: 2/5;
     display: grid;
     grid-template-rows: 1fr 5fr;
@@ -37,9 +38,19 @@ body{
 }
 
 .select-section-content{
-    display: flex;
     width: 100%;
-    flex-direction: row;
-    gap: 20px;
+    gap: 0px;
     padding: 5px;
+
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    font-size: var(--font-size-large);
 }
+
+/* .select-section-content>input{
+
+}; */
+
+
