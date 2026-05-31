@@ -2,7 +2,9 @@
 
 import './style.css';
 import {selectSectionMaker} from "./select-section.js";
+import {fetchLocation} from "./fetch-location.js";
 
 document.addEventListener('DOMContentLoaded', ()=>{
     selectSectionMaker();
+    fetchLocation('Kathmandu');
 });
