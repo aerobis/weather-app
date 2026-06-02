@@ -2,9 +2,9 @@
 
 import './style.css';
 import {selectSectionMaker} from "./select-section.js";
-import {fetchLocation} from "./fetch-location.js";
+import {fetchWeather} from "./fetch-weather.js";
 
 document.addEventListener('DOMContentLoaded', ()=>{
     selectSectionMaker();
-    fetchLocation('Kathmandu');
+    fetchWeather('Kathmandu');
 });

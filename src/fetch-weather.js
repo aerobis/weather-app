@@ -1,9 +1,14 @@
 //Y7L3P4JECFHQUZ3526P4V54U8
 
-export async function fetchLocation(location){
+export async function fetchWeather(location){
     try{
         let request = await fetch(`https://weather.visualcrossing.com/VisualCrossingWebServices/rest/services/timeline/${location}?key=Y7L3P4JECFHQUZ3526P4V54U8`);
         let result = await request.json();
+
+        // for(let i=0; i<7; i++){
+        
+        // }
+
         console.log(result);
     }catch(error){
         console.log(error);
