@@ -6,5 +6,13 @@ import {fetchWeather} from "./fetch-weather.js";
 
 document.addEventListener('DOMContentLoaded', ()=>{
     selectSectionMaker();
-    fetchWeather('Kathmandu');
+    let searchBtn = document.getElementById('search-button');
+    let locationInput = document.getElementById('location-input');
+
+    searchBtn.addEventListener('click', async ()=>{
+        let location = locationInput.value;
+        let weatherData = await fetchWeather(location);
+        console.log(weatherData);
+    });
+
 });

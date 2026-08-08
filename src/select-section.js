@@ -17,7 +17,7 @@ export function selectSectionMaker(){
     locationInput.setAttribute('placeholder', 'Insert your location...');
 
     let submitBtn = document.createElement('button');
-    submitBtn.id = 'submit-button';
+    submitBtn.id = 'search-button';
     submitBtn.textContent = "Search";
 
     // selectSectionContent.appendChild(label);
