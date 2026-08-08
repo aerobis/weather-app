@@ -20,3 +20,10 @@ export function displaySectionMaker(){
     displaySection.appendChild(displaySectionContent);
     container.appendChild(displaySection);
 }
+
+export function gridMaker(){
+    let weatherData = getWeather();
+    console.log(`Weather Data from gridMaker: ${JSON.stringify(weatherData)}`);
+    let currentWeather = weatherData[0];
+    console.log(`Current Weather from gridMaker: ${JSON.stringify(currentWeather)}`);
+}

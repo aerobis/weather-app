@@ -4,6 +4,7 @@ import './style.css';
 import {selectSectionMaker} from "./select-section.js";
 import {fetchWeather} from "./fetch-weather.js";
 import {displaySectionMaker} from "./display-section.js";
+import {gridMaker} from "./display-section.js";
 
 document.addEventListener('DOMContentLoaded', ()=>{
     selectSectionMaker();
@@ -12,8 +13,8 @@ document.addEventListener('DOMContentLoaded', ()=>{
 
     searchBtn.addEventListener('click', async ()=>{
         let location = locationInput.value;
-        fetchWeather(location);
+        await fetchWeather(location);
         displaySectionMaker();
+        gridMaker();
     });
-
 });

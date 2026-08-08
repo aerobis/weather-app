@@ -22,6 +22,7 @@ body{
     justify-content: center;
     align-items: center;
     font-size: var(--font-size-large);
+    color: var(--secondary-color);
 }
 
 /*MAIN CONTENT*/
@@ -52,5 +53,26 @@ body{
 /* .select-section-content>input{
 
 }; */
+
+
+/*DISPLAY SECTION*/
+.display-section{
+    background-color: var(--secondary-color);
+}
+
+.location-name{
+    display: flex;
+    justify-content: center;
+    font-size: var(--font-size-large);
+    color: var(--primary-color);
+}
+
+.display-section-content{
+    display: grid;
+    grid-template-rows: 1fr 1fr 1fr;
+    grid-template-columns: 3fr 1fr;
+    grid-auto-flow: row;
+}
+
 
 

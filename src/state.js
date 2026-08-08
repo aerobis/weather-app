@@ -11,7 +11,7 @@ export function setWeather(data){
 }
 
 export function getWeather(){
-    return weatherState;
+    return weatherState.data;
 }
 
 export function getLocation(){
