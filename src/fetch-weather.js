@@ -1,4 +1,5 @@
 //Y7L3P4JECFHQUZ3526P4V54U8
+import {setWeather} from "./state.js";
 
 export async function fetchWeather(location){
     try{
@@ -16,9 +17,7 @@ export async function fetchWeather(location){
             };
         });
 
-		return{
-            forecast: forecast
-        }
+		setWeather(forecast);
 	
         console.log(forecast);
     }catch(error){

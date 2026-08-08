@@ -1,4 +1,7 @@
-export function displaySectionMaker(location){
+import {getWeather} from "./state.js";
+import {getLocation} from "./state.js";
+
+export function displaySectionMaker(){
     let container = document.querySelector(".main-content");
 
     let displaySection = document.createElement('div');
@@ -9,7 +12,9 @@ export function displaySectionMaker(location){
 
     let locationName = document.createElement('h2');
     locationName.classList.add('location-name');
-    locationName.textContent = location;
+    locationName.textContent = getLocation();
+
+    console.log(`Location Name Check: ${locationName.textContent}`);
 
     displaySection.appendChild(locationName);
     displaySection.appendChild(displaySectionContent);

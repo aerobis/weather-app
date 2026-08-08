@@ -3,6 +3,7 @@
 import './style.css';
 import {selectSectionMaker} from "./select-section.js";
 import {fetchWeather} from "./fetch-weather.js";
+import {displaySectionMaker} from "./display-section.js";
 
 document.addEventListener('DOMContentLoaded', ()=>{
     selectSectionMaker();
@@ -11,8 +12,8 @@ document.addEventListener('DOMContentLoaded', ()=>{
 
     searchBtn.addEventListener('click', async ()=>{
         let location = locationInput.value;
-        let weatherData = await fetchWeather(location);
-        console.log(weatherData);
+        fetchWeather(location);
+        displaySectionMaker();
     });
 
 });
