@@ -9,6 +9,7 @@ export async function fetchWeather(location){
 
         const forecast = days.map(day => {
             return {
+                location: location,
                 date: day.datetime,
                 temp: day.temp,
                 conditions: day.conditions
