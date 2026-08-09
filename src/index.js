@@ -13,6 +13,9 @@ document.addEventListener('DOMContentLoaded', ()=>{
 
     searchBtn.addEventListener('click', async ()=>{
         let location = locationInput.value;
+        if(location == null || location == undefined || location == ''){
+            return;
+        }
         await fetchWeather(location);
         displaySectionMaker();
         gridMaker();
