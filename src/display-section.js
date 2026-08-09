@@ -41,18 +41,35 @@ export function gridMaker(){
     currentGrid.classList.add(`grid-0`);
     let currentGridTemp = document.createElement('p');
     currentGridTemp.classList.add('grid-temp');
-    currentGridTemp.textContent = `${currentWeather.temp}°FF`;
-    let currentGridDate = document.createElement('p');
-    currentGridDate.classList.add('grid-date');
-    currentGridDate.textContent += `Today\n`;
+    currentGridTemp.textContent = `${currentWeather.temp}°F`;
+
+    // let currentGridDate = document.createElement('p');
+    // currentGridDate.classList.add('grid-date');
+    // currentGridDate.textContent += `Today\n`;
     // currentGridDate.textContent += `${dateFormatter(currentWeather.date)}\n`
     // currentGridDate.textContent += `${currentWeather.date}`;
+    
+    let currentGridDateSection = document.createElement('div');
+    currentGridDateSection.classList.add('grid-date-section');
+    let currentGridStatus = document.createElement('p');
+    currentGridStatus.classList.add('grid-status');
+    currentGridStatus.textContent = `Today`;
+    let currentGridDay = document.createElement('p');
+    currentGridDay.classList.add('grid-day');
+    currentGridDay.textContent = `${dateFormatter(currentWeather.date)}`;
+    let currentGridDate = document.createElement('p');
+    currentGridDate.classList.add('grid-date');
+    currentGridDate.textContent = `${currentWeather.date}`;
+    currentGridDateSection.appendChild(currentGridStatus);
+    currentGridDateSection.appendChild(currentGridDay);
+    currentGridDateSection.appendChild(currentGridDate);
+
     let currentGridConditions = document.createElement('p');
     currentGridConditions.classList.add('grid-conditions');
     currentGridConditions.textContent = `${currentWeather.conditions}`;
 
     currentGrid.appendChild(currentGridTemp);
-    currentGrid.appendChild(currentGridDate);
+    currentGrid.appendChild(currentGridDateSection);
     currentGrid.appendChild(currentGridConditions);
     container.appendChild(currentGrid);
 
