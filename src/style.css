@@ -12,6 +12,7 @@ body{
 
 :root{
     --font-size-large: clamp(1.3rem, 2.1vw, 1.7rem);
+    --font-size-medium: clamp(1rem, 1.5vw, 1.3rem);
     --primary-color: #540d6e;
     --secondary-color: #ee4266;
 }
@@ -103,19 +104,27 @@ body{
     
     display: flex;
     flex-direction: column;
-    justify-content: center;
+    justify-content: end;
 }
 
 .grid-0{
     grid-area: header;
 }
 
-.grid-0 > .grid-date-section{
-    display: flex;
-    flex-direction: column;
-    gap: 0px;
-    padding: 0px;
-    margin: 0px;
+.grid-temp{
+    font-size: var(--font-size-large);
+}
+
+.grid-status > p{
+    font-size: var(--font-size-medium);
+    margin-bottom: 10px;
+}
+
+.grid-day{
+    margin-bottom: 0px
+}
+.grid-date{
+    margin-top: 0px;
 }
 
 .grid-1 {grid-area: item1;}

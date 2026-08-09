@@ -59,7 +59,7 @@ export function gridMaker(){
     currentGridDay.textContent = `${dateFormatter(currentWeather.date)}`;
     let currentGridDate = document.createElement('p');
     currentGridDate.classList.add('grid-date');
-    currentGridDate.textContent = `${currentWeather.date}`;
+    currentGridDate.textContent = `${ordinalDateFormatter(new Date(currentWeather.date))}`;
     currentGridDateSection.appendChild(currentGridStatus);
     currentGridDateSection.appendChild(currentGridDay);
     currentGridDateSection.appendChild(currentGridDate);
@@ -81,22 +81,54 @@ export function gridMaker(){
         let dayGridTemp = document.createElement('p');
         dayGridTemp.classList.add('grid-temp');
         dayGridTemp.textContent = `${dayWeather.temp}°F`;
+
+        let dayGridDateSection = document.createElement('div');
+        dayGridDateSection.classList.add('grid-date-section');
+        let dayGridDay = document.createElement('p');
+        dayGridDay.classList.add('grid-day');
+        dayGridDay.textContent = `${dateFormatter(dayWeather.date)}`;
         let dayGridDate = document.createElement('p');
         dayGridDate.classList.add('grid-date');
-        dayGridDate.textContent = `${dateFormatter(dayWeather.date)}`;
+        dayGridDate.textContent = `${ordinalDateFormatter(new Date(dayWeather.date))}`;
+        dayGridDateSection.appendChild(dayGridDay);
+        dayGridDateSection.appendChild(dayGridDate);
+
         let dayGridConditions = document.createElement('p');
         dayGridConditions.classList.add('grid-conditions');
         dayGridConditions.textContent = `${dayWeather.conditions}`;
 
         dayGrid.appendChild(dayGridTemp);
-        dayGrid.appendChild(dayGridDate);
+        dayGrid.appendChild(dayGridDateSection);
         dayGrid.appendChild(dayGridConditions);
         container.appendChild(dayGrid);
     }
 }
 
+//To get the current day associated with the date
 function dateFormatter(dateString){
     let apiDate = dateString;
     let dateObj = new Date(apiDate);
     return dateObj.toLocaleDateString('en-US', {weekday: 'long'});
+}
+
+//To abbreviate date to "1st Jan" format\
+function ordinalDateFormatter(dateString){
+    const day = dateString.getDate();
+
+    //Ordinal suffix
+    let suffix;
+    let remainder;
+
+    //Special cases (11, 12, 13) always get 'th'
+    if (remainder >= 11 && remainder <= 13) {
+        suffix = 'th';
+    } else {
+        suffix = ['th', 'st', 'nd', 'rd'][day % 10] || 'th';
+    }
+
+
+    //Abbreviate month name
+    let month = dateString.toLocaleString('en-US', {month: 'short'});
+
+    return `${day}${suffix} ${month}`;
 }
