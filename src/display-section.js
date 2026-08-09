@@ -10,13 +10,15 @@ export function displaySectionMaker(){
     let displaySectionContent = document.createElement('div');
     displaySectionContent.classList.add('display-section-content');
 
-    let locationName = document.createElement('h2');
-    locationName.classList.add('location-name');
-    locationName.textContent = getLocation();
+    if(!document.querySelector('.location-name')){
+        let locationName = document.createElement('h2');
+        locationName.classList.add('location-name');
+        locationName.textContent = getLocation();
+        displaySection.appendChild(locationName);
+    }
 
-    console.log(`Location Name Check: ${locationName.textContent}`);
+    // console.log(`Location Name Check: ${locationName.textContent}`);
 
-    displaySection.appendChild(locationName);
     displaySection.appendChild(displaySectionContent);
     container.appendChild(displaySection);
 }
