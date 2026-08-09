@@ -74,5 +74,5 @@ export function gridMaker(){
 function dateFormatter(dateString){
     let apiDate = dateString;
     let dateObj = new Date(apiDate);
-    return dayName = dateObj.toLocaleDateString('en-US', {weekday: 'Long'});
+    return dateObj.toLocaleDateString('en-US', {weekday: 'long'});
 }
