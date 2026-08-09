@@ -12,7 +12,7 @@ document.addEventListener('DOMContentLoaded', ()=>{
     let locationInput = document.getElementById('location-input');
 
     async function handleActivation(event){
-        if(event.type === "Click" || (event.type === "keydown" && event.key === "Enter")){
+        if(event.type === "click" || (event.type === "keydown" && event.key === "Enter")){
             let location = locationInput.value;
             if(location == null || location == undefined || location == ''){
                 return;
@@ -23,7 +23,9 @@ document.addEventListener('DOMContentLoaded', ()=>{
         }
     }
 
-    searchBtn.addEventListener('click', handleActivation);
+    searchBtn.addEventListener('click', (e)=>{
+        handleActivation(e);
+    });
     locationInput.addEventListener('keydown', (e)=>{
         if(e.key === "Enter"){
             handleActivation(e);

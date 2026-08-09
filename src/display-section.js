@@ -110,9 +110,21 @@ export function gridMaker(){
         gridTemp.forEach(temp => {
             temp.addEventListener('click', (e) => {
                 e.preventDefault();
-                let element = e.target;
+                //The element that was clicked
+                let element = e.currentTarget;
+                let currentGrid = element.closest(`[class*="grid-"]`); //Find the parent grid
+                if(!currentGrid) return;
+                //Create an array of all classes, return the element that includes 'grid-'
+                let gridClass = Array.from(currentGrid.classList).find(c => c.startsWith(`grid-`));
+                //Extract the number from the 'grid-'
+                let gridIndex = parseInt(gridClass.split('-')[1], 10);
+                console.log(`Grid Index: ${gridIndex}`)
+                let passWeather = weatherData[gridIndex];
+                let passTemp = passWeather.temp; //Temperature to be passed
+
                 console.log(`Clicked: ${element}`)
-                temperatureConverter(element);
+
+                temperatureConverter(element, passTemp);
             })}
         );
     }
@@ -148,14 +160,14 @@ function ordinalDateFormatter(dateString){
 }
 
 //Temperature Converter
-function temperatureConverter(element){
-    let currentTemp;
+function temperatureConverter(element, temp){
+    let currentTemp = temp;
     let resultTemp;
 
     if (element.classList.contains("f")){ //If element is in Fahrenheit
         //Convert to Celcius
         resultTemp = ((currentTemp - 32) * (5/9)).toFixed(2);
-        console.log(resultTemp)
+        console.log(`Result Temp: ${resultTemp}`)
         //Convert .f to .c for next click
         element.classList.remove('f');
         element.classList.add('c');
