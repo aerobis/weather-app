@@ -40,6 +40,9 @@ export function gridMaker(){
     let currentGrid = document.createElement('div');
     currentGrid.classList.add('weather-grids');
     currentGrid.classList.add(`grid-0`);
+
+    currentGrid.dataset.index = 0;
+
     let currentGridTemp = document.createElement('p');
     currentGridTemp.classList.add('grid-temp');
     currentGridTemp.classList.add('f');
@@ -80,6 +83,9 @@ export function gridMaker(){
         let dayGrid = document.createElement('div');
         dayGrid.classList.add('weather-grids');
         dayGrid.classList.add(`grid-${i}`);
+
+        dayGrid.dataset.index = i;
+
         let dayGridTemp = document.createElement('p');
         dayGridTemp.classList.add('grid-temp');
         dayGridTemp.classList.add('f');
@@ -104,30 +110,28 @@ export function gridMaker(){
         dayGrid.appendChild(dayGridDateSection);
         dayGrid.appendChild(dayGridConditions);
         container.appendChild(dayGrid);
-
-        //GRID TEMPERATURE CHANGE
-        let gridTemp = document.querySelectorAll('.grid-temp');
-        gridTemp.forEach(temp => {
-            temp.addEventListener('click', (e) => {
-                e.preventDefault();
-                //The element that was clicked
-                let element = e.currentTarget;
-                let currentGrid = element.closest(`[class*="grid-"]`); //Find the parent grid
-                if(!currentGrid) return;
-                //Create an array of all classes, return the element that includes 'grid-'
-                let gridClass = Array.from(currentGrid.classList).find(c => c.startsWith(`grid-`));
-                //Extract the number from the 'grid-'
-                let gridIndex = parseInt(gridClass.split('-')[1], 10);
-                console.log(`Grid Index: ${gridIndex}`)
-                let passWeather = weatherData[gridIndex];
-                let passTemp = passWeather.temp; //Temperature to be passed
-
-                console.log(`Clicked: ${element}`)
-
-                temperatureConverter(element, passTemp);
-            })}
-        );
     }
+
+    let gridTemp = document.querySelectorAll('.grid-temp');
+    gridTemp.forEach(temp => {
+        temp.addEventListener('click', (e) => {
+            e.preventDefault();
+            //The element that was clicked
+            let element = e.currentTarget;
+            let clickedGrid = element.closest(`.weather-grids`); //Find the parent grid
+            if(!clickedGrid) return;
+
+            //Extract the number from the 'grid-'
+            let gridIndex = Number(clickedGrid.dataset.index);
+            console.log(`Grid Index: ${gridIndex}`)
+            let passWeather = weatherData[gridIndex];
+            let passTemp = passWeather.temp; //Temperature to be passed
+
+            console.log(`Clicked: ${element}`)
+
+            temperatureConverter(element, passTemp);
+        })}
+    );
 }
 
 //To get the current day associated with the date
@@ -161,22 +165,27 @@ function ordinalDateFormatter(dateString){
 
 //Temperature Converter
 function temperatureConverter(element, temp){
-    let currentTemp = temp;
+    //First time running, temperature passed is always in Fahrenheit
+    let fahrenheit = temp;
+
+    let celsius;
     let resultTemp;
 
     if (element.classList.contains("f")){ //If element is in Fahrenheit
         //Convert to Celcius
-        resultTemp = ((currentTemp - 32) * (5/9)).toFixed(2);
+        resultTemp = ((fahrenheit - 32) * (5/9)).toFixed(2);
         console.log(`Result Temp: ${resultTemp}`)
         //Convert .f to .c for next click
         element.classList.remove('f');
         element.classList.add('c');
         element.textContent = `${resultTemp}°C`
+        celsius = resultTemp;
     }else if (element.classList.contains("c")){
-        resultTemp = ( ( (currentTemp * (5/9)) + 32 ) ).toFixed(2);
         element.classList.remove('c');
         element.classList.add('f');
+        resultTemp = temp;
         element.textContent = `${resultTemp}°F`
+
     }else{
         return;
     }
