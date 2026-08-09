@@ -11,13 +11,31 @@ document.addEventListener('DOMContentLoaded', ()=>{
     let searchBtn = document.getElementById('search-button');
     let locationInput = document.getElementById('location-input');
 
-    searchBtn.addEventListener('click', async ()=>{
-        let location = locationInput.value;
-        if(location == null || location == undefined || location == ''){
-            return;
+    async function handleActivation(event){
+        if(event.type === "Click" || (event.type === "keydown" && event.key === "Enter")){
+            let location = locationInput.value;
+            if(location == null || location == undefined || location == ''){
+                return;
+            }           
+            await fetchWeather(location);
+            displaySectionMaker();
+            gridMaker();
         }
-        await fetchWeather(location);
-        displaySectionMaker();
-        gridMaker();
-    });
+    }
+
+    searchBtn.addEventListener('click', handleActivation);
+    locationInput.addEventListener('keydown', (e)=>{
+        if(e.key === "Enter"){
+            handleActivation(e);
+        }
+    })
+    // searchBtn.addEventListener('click', async ()=>{
+    //     let location = locationInput.value;
+    //     if(location == null || location == undefined || location == ''){
+    //         return;
+    //     }
+    //     await fetchWeather(location);
+    //     displaySectionMaker();
+    //     gridMaker();
+    // });
 });

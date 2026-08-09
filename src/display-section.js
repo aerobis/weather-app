@@ -1,3 +1,4 @@
+// import { CodeGenerationResults } from "webpack";
 import {getWeather} from "./state.js";
 import {getLocation} from "./state.js";
 
@@ -41,6 +42,7 @@ export function gridMaker(){
     currentGrid.classList.add(`grid-0`);
     let currentGridTemp = document.createElement('p');
     currentGridTemp.classList.add('grid-temp');
+    currentGridTemp.classList.add('f');
     currentGridTemp.textContent = `${currentWeather.temp}°F`;
 
     // let currentGridDate = document.createElement('p');
@@ -80,6 +82,7 @@ export function gridMaker(){
         dayGrid.classList.add(`grid-${i}`);
         let dayGridTemp = document.createElement('p');
         dayGridTemp.classList.add('grid-temp');
+        dayGridTemp.classList.add('f');
         dayGridTemp.textContent = `${dayWeather.temp}°F`;
 
         let dayGridDateSection = document.createElement('div');
@@ -101,6 +104,17 @@ export function gridMaker(){
         dayGrid.appendChild(dayGridDateSection);
         dayGrid.appendChild(dayGridConditions);
         container.appendChild(dayGrid);
+
+        //GRID TEMPERATURE CHANGE
+        let gridTemp = document.querySelectorAll('.grid-temp');
+        gridTemp.forEach(temp => {
+            temp.addEventListener('click', (e) => {
+                e.preventDefault();
+                let element = e.target;
+                console.log(`Clicked: ${element}`)
+                temperatureConverter(element);
+            })}
+        );
     }
 }
 
@@ -132,3 +146,26 @@ function ordinalDateFormatter(dateString){
 
     return `${day}${suffix} ${month}`;
 }
+
+//Temperature Converter
+function temperatureConverter(element){
+    let currentTemp;
+    let resultTemp;
+
+    if (element.classList.contains("f")){ //If element is in Fahrenheit
+        //Convert to Celcius
+        resultTemp = ((currentTemp - 32) * (5/9)).toFixed(2);
+        console.log(resultTemp)
+        //Convert .f to .c for next click
+        element.classList.remove('f');
+        element.classList.add('c');
+        element.textContent = `${resultTemp}°C`
+    }else if (element.classList.contains("c")){
+        resultTemp = ( ( (currentTemp * (5/9)) + 32 ) ).toFixed(2);
+        element.classList.remove('c');
+        element.classList.add('f');
+        element.textContent = `${resultTemp}°F`
+    }else{
+        return;
+    }
+};
