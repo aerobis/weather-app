@@ -1,5 +1,4 @@
 // import { CodeGenerationResults } from "webpack";
-import { useInsertionEffect } from "react";
 import {getWeather} from "./state.js";
 import {getLocation} from "./state.js";
 
@@ -35,6 +34,18 @@ export function gridMaker(){
     let currentWeather = weatherData[0];
     console.log(`Current Weather from gridMaker: ${JSON.stringify(currentWeather)}`);
     let totalDays = weatherData.length;
+
+    //Gradients for all weather conditions
+    let weatherStyles = {
+        'clear': 'linear-gradient(135deg, #FFB74D, #FF8A65)',        // Warm Sunrise Orange
+        'partly-cloudy': 'linear-gradient(135deg, #5c93c4, #87b5db)', // Soft Daylight Blue
+        'cloudy': 'linear-gradient(135deg, #758A99, #A3B8CC)',        // Flat Overcast Grey
+        'rain': 'linear-gradient(135deg, #4A6572, #344955)',          // Deep Muted Rain Slate
+        'thunderstorm': 'linear-gradient(135deg, #1F2833, #392056)',  // Dark Electric Purple/Black
+        'snow': 'linear-gradient(135deg, #E0F7FA, #80DEEA)',          // Bright Icy Blue
+        'fog': 'linear-gradient(135deg, #A8B4BC, #CFD8DC)',           // Hazy Mist Silver
+        'unknown': 'linear-gradient(135deg, #2C3E50, #000000)'        // Solid Dark Neutral
+    };
 
     //Structure should go: Temp > Day (Date) > conditions
     //CURRENT GRID IS DIFFERENT THAN THE OTHER GRIDS, SO IT'S OUTSIDE THE LOOP
@@ -73,6 +84,10 @@ export function gridMaker(){
     let currentGridConditions = document.createElement('p');
     currentGridConditions.classList.add('grid-conditions');
     currentGridConditions.textContent = `${currentWeather.conditions}`;
+    currentGrid.dataset.conditions = conditionToKey(currentWeather.conditions)
+
+    //Apply gradient
+    currentGrid.style.background = weatherStyles[currentGrid.dataset.conditions]
 
     currentGrid.appendChild(currentGridTemp);
     currentGrid.appendChild(currentGridDateSection);
@@ -107,6 +122,10 @@ export function gridMaker(){
         let dayGridConditions = document.createElement('p');
         dayGridConditions.classList.add('grid-conditions');
         dayGridConditions.textContent = `${dayWeather.conditions}`;
+        dayGrid.dataset.conditions = conditionToKey(dayWeather.conditions)
+
+        //Apply gradient
+        dayGrid.style.background = weatherStyles[dayGrid.dataset.conditions];
 
         dayGrid.appendChild(dayGridTemp);
         dayGrid.appendChild(dayGridDateSection);
@@ -201,9 +220,11 @@ function conditionToKey(condition){
     //             snow, fog, unknown
     //             ];
 
+    console.log(`Passed condition: ${condition}`)
     let resultKey;
     
-    let strippedCondition = condition.toLower().split(' ').join('-');
+    //Trim to remove whitespaces at the beginning, split at a comma or a whitespace, join with "-"
+    let strippedCondition = condition.trim().toLowerCase().split(/[,\s]+/).join('-');
 
     if (strippedCondition.includes('clear')){
         resultKey = 'clear';
