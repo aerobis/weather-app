@@ -1,4 +1,5 @@
 // import { CodeGenerationResults } from "webpack";
+import { useInsertionEffect } from "react";
 import {getWeather} from "./state.js";
 import {getLocation} from "./state.js";
 
@@ -78,6 +79,7 @@ export function gridMaker(){
     currentGrid.appendChild(currentGridConditions);
     container.appendChild(currentGrid);
 
+    //For the rest of the grids
     for(let i = 1; i < totalDays; i++){
         let dayWeather = weatherData[i];
         let dayGrid = document.createElement('div');
@@ -181,12 +183,51 @@ function temperatureConverter(element, temp){
         element.textContent = `${resultTemp}°C`
         celsius = resultTemp;
     }else if (element.classList.contains("c")){
+        //Since F is passed at least once already, just change it back
         element.classList.remove('c');
         element.classList.add('f');
         resultTemp = temp;
         element.textContent = `${resultTemp}°F`
-
     }else{
         return;
     }
 };
+
+//Map condition to key function
+function conditionToKey(condition){
+    // keys = [
+    //             sunny, clear, partly-cloudy, cloudy,
+    //             rain, thunderstorm,
+    //             snow, fog, unknown
+    //             ];
+
+    let resultKey;
+    
+    let strippedCondition = condition.toLower().split(' ').join('-');
+
+    if (strippedCondition.includes('clear')){
+        resultKey = 'clear';
+    }else if(strippedCondition.includes('sunny') || strippedCondition.includes('partly-sunny')
+            || strippedCondition.includes('partially-sunny')){
+        resultKey = 'sunny';
+    }else if(strippedCondition.includes('cloudy') || strippedCondition.includes('overcast')){
+        resultKey = 'cloudy';
+    }else if(strippedCondition.includes('partly-cloudy') || strippedCondition.includes('partially-cloudy')){
+        resultKey = 'partly-cloudy';
+    }else if(strippedCondition.includes('rain') || strippedCondition.includes('shower')
+            || strippedCondition.includes('drizzle')){
+        resultKey = 'rain';
+    }else if(strippedCondition.includes('thunder') || strippedCondition.includes('storm')){
+        resultKey = 'thunderstorm';
+    }else if(strippedCondition.includes('snow') || strippedCondition.includes('sleet')
+            || strippedCondition.includes('hail')){
+        resultKey = 'snow';
+    }else if(strippedCondition.includes('fog') || strippedCondition.includes('mist')
+            || strippedCondition.includes('haze') || strippedCondition.includes('smoke')){
+        resultKey = 'fog';
+    }else{
+        resultKey = 'unknown'
+    }
+
+    return resultKey;
+}

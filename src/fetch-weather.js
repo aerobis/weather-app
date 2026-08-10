@@ -13,7 +13,7 @@ export async function fetchWeather(location){
                 location: location,
                 date: day.datetime,
                 temp: day.temp,
-                conditions: day.conditions
+                conditions: day.conditions,
             };
         });
 
