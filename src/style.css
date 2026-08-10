@@ -146,8 +146,17 @@ body{
 .grid-6 {grid-area: item6;}
 
 /*GRID ICONS*/
+.grid-icon-section{
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+}
+
 .grid-icon{
     image-rendering: pixelated;
     image-rendering: crisp-edges;
+    height: 106px;
+    width: 106px;
 }
 

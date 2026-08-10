@@ -86,15 +86,15 @@ export function gridMaker(){
     currentGridConditions.textContent = `${currentWeather.conditions}`;
     currentGrid.dataset.condition = conditionToKey(currentWeather.conditions)
 
-    //Style Grid
-    weatherStyle(currentGrid, currentGrid.dataset.condition);
-
     currentGridContentSection.appendChild(currentGridTemp);
     currentGridContentSection.appendChild(currentGridDateSection);
     currentGridContentSection.appendChild(currentGridConditions);
     currentGrid.appendChild(currentGridIconSection);
     currentGrid.appendChild(currentGridContentSection);
     container.appendChild(currentGrid);
+
+    //Style Grid
+    weatherStyle(currentGrid, currentGrid.dataset.condition);
 
     //For the rest of the grids
     for(let i = 1; i < totalDays; i++){
@@ -138,15 +138,15 @@ export function gridMaker(){
         dayGridConditions.textContent = `${dayWeather.conditions}`;
         dayGrid.dataset.condition = conditionToKey(dayWeather.conditions)
 
-        //Style Grid
-        weatherStyle(dayGrid, dayGrid.dataset.condition);
-
         dayGridContentSection.appendChild(dayGridTemp);
         dayGridContentSection.appendChild(dayGridDateSection);
         dayGridContentSection.appendChild(dayGridConditions);
         dayGrid.appendChild(dayGridIconSection);
         dayGrid.appendChild(dayGridContentSection);
         container.appendChild(dayGrid);
+
+        //Style Grid
+        weatherStyle(dayGrid, dayGrid.dataset.condition);
     }
 
     let gridTemp = document.querySelectorAll('.grid-temp');
@@ -287,12 +287,23 @@ async function weatherStyle(grid, condition){
         'unknown': 'linear-gradient(135deg, #2C3E50, #000000)'        // Solid Dark Neutral
     };
 
+    let weatherIcons = {
+        'clear': new URL('./assets/clear.png', import.meta.url).href,
+        'sunny': new URL('./assets/sunny.png', import.meta.url).href,
+        'partly-cloudy': new URL('./assets/partly-cloudy.png', import.meta.url).href,
+        'cloudy': new URL('./assets/cloudy.png', import.meta.url).href,
+        'rain': new URL('./assets/rain.png', import.meta.url).href,
+        'light-rain': new URL('./assets/light-rain.png', import.meta.url).href,
+        'thunderstorm': new URL('./assets/thunderstorm.png', import.meta.url).href,
+        'snow': new URL('./assets/snow.png', import.meta.url).href,
+        'fog': new URL('./assets/fog.png', import.meta.url).href,
+        'unknown': new URL('./assets/unknown.png', import.meta.url).href
+    }
+
     let gridIcon = grid.querySelector('.grid-icon');
     console.log(`Selected gridIcon: ${gridIcon}`)
 
     grid.style.background = weatherGradients[condition];
     
-    if(gridIcon){
-        gridIcon.src = `.src/assets/${condition}.png`;
-    }
+    gridIcon.src = weatherIcons[condition];
 }
