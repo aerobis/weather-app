@@ -243,16 +243,18 @@ function conditionToKey(condition){
         resultKey = 'cloudy';
     }else if(strippedCondition.includes('partly-cloudy') || strippedCondition.includes('partially-cloudy')){
         resultKey = 'partly-cloudy';
-    }else if(strippedCondition.includes('rain') || strippedCondition.includes('shower')
-            || strippedCondition.includes('drizzle')){
+    }else if(strippedCondition.includes('rain') || strippedCondition.includes('shower')){
         resultKey = 'rain';
+    }else if(strippedCondition.includes('drizzle') || strippedCondition.includes('light-rain')
+            || strippedCondition.includes('mist')  || strippedCondition.includes('sprinkle')){
+        resultKey = 'light-rain';
     }else if(strippedCondition.includes('thunder') || strippedCondition.includes('storm')){
         resultKey = 'thunderstorm';
     }else if(strippedCondition.includes('snow') || strippedCondition.includes('sleet')
             || strippedCondition.includes('hail')){
         resultKey = 'snow';
-    }else if(strippedCondition.includes('fog') || strippedCondition.includes('mist')
-            || strippedCondition.includes('haze') || strippedCondition.includes('smoke')){
+    }else if(strippedCondition.includes('fog') || strippedCondition.includes('haze')
+            || strippedCondition.includes('smoke')){
         resultKey = 'fog';
     }else{
         resultKey = 'unknown'
@@ -269,7 +271,8 @@ async function weatherStyle(grid, condition){
         'sunny': 'linear-gradient(135deg, #FF8A65, #f68d23',       // Warm Sunrise Orange
         'partly-cloudy': 'linear-gradient(135deg, #5c93c4, #87b5db)', // Soft Daylight Blue
         'cloudy': 'linear-gradient(135deg, #758A99, #A3B8CC)',        // Flat Overcast Grey
-        'rain': 'linear-gradient(135deg, #4A6572, #344955)',          // Deep Muted Rain Slate
+        'rain': 'linear-gradient(135deg, #527d92, #284557)',
+        'light-rain': 'linear-gradient(135deg, #42b1b1, #2d6382',          // Deep Muted Rain Slate
         'thunderstorm': 'linear-gradient(135deg, #1F2833, #392056)',  // Dark Electric Purple/Black
         'snow': 'linear-gradient(135deg, #E0F7FA, #80DEEA)',          // Bright Icy Blue
         'fog': 'linear-gradient(135deg, #A8B4BC, #CFD8DC)',           // Hazy Mist Silver
