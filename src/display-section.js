@@ -56,6 +56,14 @@ export function gridMaker(){
 
     currentGrid.dataset.index = 0;
 
+    //Icon Section
+    let currentGridIconSection = document.createElement('div');
+    currentGridIconSection.classList.add('grid-icon-section');
+
+    //Content Section
+    let currentGridContentSection = document.createElement('div');
+    currentGridContentSection.classList.add('grid-content-section');
+
     let currentGridTemp = document.createElement('p');
     currentGridTemp.classList.add('grid-temp');
     currentGridTemp.classList.add('f');
@@ -85,14 +93,16 @@ export function gridMaker(){
     let currentGridConditions = document.createElement('p');
     currentGridConditions.classList.add('grid-conditions');
     currentGridConditions.textContent = `${currentWeather.conditions}`;
-    currentGrid.dataset.conditions = conditionToKey(currentWeather.conditions)
+    currentGrid.dataset.condition = conditionToKey(currentWeather.conditions)
 
     //Apply gradient
-    currentGrid.style.background = weatherStyles[currentGrid.dataset.conditions]
+    currentGrid.style.background = weatherStyles[currentGrid.dataset.condition]
 
-    currentGrid.appendChild(currentGridTemp);
-    currentGrid.appendChild(currentGridDateSection);
-    currentGrid.appendChild(currentGridConditions);
+    currentGridContentSection.appendChild(currentGridTemp);
+    currentGridContentSection.appendChild(currentGridDateSection);
+    currentGridContentSection.appendChild(currentGridConditions);
+    currentGrid.appendChild(currentGridIconSection);
+    currentGrid.appendChild(currentGridContentSection);
     container.appendChild(currentGrid);
 
     //For the rest of the grids
@@ -103,6 +113,14 @@ export function gridMaker(){
         dayGrid.classList.add(`grid-${i}`);
 
         dayGrid.dataset.index = i;
+
+        //Icon section
+        let dayGridIconSection = document.createElement('div');
+        dayGridIconSection.classList.add('grid-icon-section');
+
+        //Content Section
+        let dayGridContentSection = document.createElement('div');
+        dayGridContentSection.classList.add('grid-content-section');
 
         let dayGridTemp = document.createElement('p');
         dayGridTemp.classList.add('grid-temp');
@@ -123,14 +141,16 @@ export function gridMaker(){
         let dayGridConditions = document.createElement('p');
         dayGridConditions.classList.add('grid-conditions');
         dayGridConditions.textContent = `${dayWeather.conditions}`;
-        dayGrid.dataset.conditions = conditionToKey(dayWeather.conditions)
+        dayGrid.dataset.condition = conditionToKey(dayWeather.conditions)
 
         //Apply gradient
-        dayGrid.style.background = weatherStyles[dayGrid.dataset.conditions];
+        dayGrid.style.background = weatherStyles[dayGrid.dataset.condition];
 
-        dayGrid.appendChild(dayGridTemp);
-        dayGrid.appendChild(dayGridDateSection);
-        dayGrid.appendChild(dayGridConditions);
+        dayGridContentSection.appendChild(dayGridTemp);
+        dayGridContentSection.appendChild(dayGridDateSection);
+        dayGridContentSection.appendChild(dayGridConditions);
+        dayGrid.appendChild(dayGridIconSection);
+        dayGrid.appendChild(dayGridContentSection);
         container.appendChild(dayGrid);
     }
 
