@@ -169,7 +169,7 @@ function ordinalDateFormatter(dateString){
 
     //Ordinal suffix
     let suffix;
-    let remainder;
+    let remainder = day % 100;
 
     //Special cases (11, 12, 13) always get 'th'
     if (remainder >= 11 && remainder <= 13) {
