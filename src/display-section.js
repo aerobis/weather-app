@@ -47,6 +47,10 @@ export function gridMaker(){
     let currentGridIconSection = document.createElement('div');
     currentGridIconSection.classList.add('grid-icon-section');
 
+    let currentGridIcon = document.createElement('img');
+    currentGridIcon.classList.add('grid-icon');
+    currentGridIconSection.appendChild(currentGridIcon);
+
     //Content Section
     let currentGridContentSection = document.createElement('div');
     currentGridContentSection.classList.add('grid-content-section');
@@ -104,6 +108,10 @@ export function gridMaker(){
         //Icon section
         let dayGridIconSection = document.createElement('div');
         dayGridIconSection.classList.add('grid-icon-section');
+
+        let dayGridIcon = document.createElement('img');
+        dayGridIcon.classList.add('grid-icon');
+        dayGridIconSection.appendChild(dayGridIcon);
 
         //Content Section
         let dayGridContentSection = document.createElement('div');
@@ -279,5 +287,12 @@ async function weatherStyle(grid, condition){
         'unknown': 'linear-gradient(135deg, #2C3E50, #000000)'        // Solid Dark Neutral
     };
 
+    let gridIcon = grid.querySelector('.grid-icon');
+    console.log(`Selected gridIcon: ${gridIcon}`)
+
     grid.style.background = weatherGradients[condition];
+    
+    if(gridIcon){
+        gridIcon.src = `.src/assets/${condition}.png`;
+    }
 }

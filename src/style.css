@@ -145,3 +145,9 @@ body{
 .grid-5 {grid-area: item5;}
 .grid-6 {grid-area: item6;}
 
+/*GRID ICONS*/
+.grid-icon{
+    image-rendering: pixelated;
+    image-rendering: crisp-edges;
+}
+
