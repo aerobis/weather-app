@@ -237,38 +237,24 @@ function conditionToKey(condition){
     //             ];
 
     console.log(`Passed condition: ${condition}`)
-    let resultKey;
     
     //Trim to remove whitespaces at the beginning, split at a comma or a whitespace, join with "-"
     let strippedCondition = condition.trim().toLowerCase().split(/[,\s]+/).join('-');
 
-    if (strippedCondition.includes('clear')){
-        resultKey = 'clear';
-    }else if(strippedCondition.includes('sunny') || strippedCondition.includes('partly-sunny')
-            || strippedCondition.includes('partially-sunny')){
-        resultKey = 'sunny';
-    }else if(strippedCondition.includes('cloudy') || strippedCondition.includes('overcast')){
-        resultKey = 'cloudy';
-    }else if(strippedCondition.includes('partly-cloudy') || strippedCondition.includes('partially-cloudy')){
-        resultKey = 'partly-cloudy';
-    }else if(strippedCondition.includes('rain') || strippedCondition.includes('shower')){
-        resultKey = 'rain';
-    }else if(strippedCondition.includes('drizzle') || strippedCondition.includes('light-rain')
-            || strippedCondition.includes('mist')  || strippedCondition.includes('sprinkle')){
-        resultKey = 'light-rain';
-    }else if(strippedCondition.includes('thunder') || strippedCondition.includes('storm')){
-        resultKey = 'thunderstorm';
-    }else if(strippedCondition.includes('snow') || strippedCondition.includes('sleet')
-            || strippedCondition.includes('hail')){
-        resultKey = 'snow';
-    }else if(strippedCondition.includes('fog') || strippedCondition.includes('haze')
-            || strippedCondition.includes('smoke')){
-        resultKey = 'fog';
-    }else{
-        resultKey = 'unknown'
-    }
-
-    return resultKey;
+    let weatherConditionRules = [
+        {key: 'clear', tests:[/clear/]},
+        {key: 'partly-cloudy', tests:[/partly[- ]cloudy/, /partially[- ]cloudy/, /mostly[- ]cloudy/]},
+        {key: 'rain', tests:[/rain/, /shower/]},
+        {key: 'cloudy', tests: [/cloudy/, /overcast/]},
+        {key: 'light-rain', tests:[/drizzle/, /light[- ]rain/, /mist/, /sprinkle/]},
+        {key: 'thunderstorm', tests:[/thunder/, /storm/]},
+        {key: 'snow', tests:[/snow/, /sleet/, /hail/]},
+        {key: 'fog', tests:[/fog/, /haze/, /smoke/]},
+        {key: 'unknown', tests:[/./] },
+    ]
+    return weatherConditionRules.find(rule => 
+        rule.tests.some(regex => regex.test(strippedCondition))
+    )?.key || 'unknown';
 }
 
 //Style the weather grid
