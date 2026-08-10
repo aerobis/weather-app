@@ -37,7 +37,8 @@ export function gridMaker(){
 
     //Gradients for all weather conditions
     let weatherStyles = {
-        'clear': 'linear-gradient(135deg, #FFB74D, #FF8A65)',        // Warm Sunrise Orange
+        'clear': 'linear-gradient(135deg, #FFB74D, #FF8A65)', 
+        'sunny': 'linear-gradient(135deg, #FF8A65, #f68d23',       // Warm Sunrise Orange
         'partly-cloudy': 'linear-gradient(135deg, #5c93c4, #87b5db)', // Soft Daylight Blue
         'cloudy': 'linear-gradient(135deg, #758A99, #A3B8CC)',        // Flat Overcast Grey
         'rain': 'linear-gradient(135deg, #4A6572, #344955)',          // Deep Muted Rain Slate
