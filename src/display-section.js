@@ -244,8 +244,8 @@ function conditionToKey(condition){
 
     let weatherConditionRules = [
         {key: 'clear', tests:[/clear/]},
-        {key: 'partly-cloudy', tests:[/partly[- ]cloudy/, /partially[- ]cloudy/, /mostly[- ]cloudy/]},
         {key: 'rain', tests:[/rain/, /shower/]},
+        {key: 'partly-cloudy', tests:[/partly[- ]cloudy/, /partially[- ]cloudy/, /mostly[- ]cloudy/]},
         {key: 'cloudy', tests: [/cloudy/, /overcast/]},
         {key: 'light-rain', tests:[/drizzle/, /light[- ]rain/, /mist/, /sprinkle/]},
         {key: 'thunderstorm', tests:[/thunder/, /storm/]},
