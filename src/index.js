@@ -18,7 +18,7 @@ document.addEventListener('DOMContentLoaded', ()=>{
                 return;
             }           
             await fetchWeather(location);
-            displaySectionMaker();
+            // displaySectionMaker();
             gridMaker();
         }
     }

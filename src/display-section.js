@@ -4,9 +4,19 @@ import {getLocation} from "./state.js";
 
 export function displaySectionMaker(){
     let container = document.querySelector(".main-content");
+    let displaySection = document.querySelector('.display-section');
 
-    let displaySection = document.createElement('div');
-    displaySection.classList.add('display-section');
+    // If display section already exists, erase it
+    if(displaySection){
+        displaySection.innerHTML = '';
+    // If not, make it
+    }else{
+        displaySection = document.createElement('div');
+        displaySection.classList.add('display-section');
+    }
+
+    let displaySectionLocation = document.createElement('div');
+    displaySectionLocation.classList.add('display-section-location');
 
     let displaySectionContent = document.createElement('div');
     displaySectionContent.classList.add('display-section-content');
@@ -16,16 +26,22 @@ export function displaySectionMaker(){
         let locationName = document.createElement('h2');
         locationName.classList.add('location-name');
         locationName.textContent = getLocation();
-        displaySection.appendChild(locationName);
+        displaySectionLocation.appendChild(locationName);
+    }else{
+        let locationName = document.querySelector('.location-name');
+        locationName.textContent = getLocation();
+        displaySectionLocation.appendChild(locationName);
     }
 
     // console.log(`Location Name Check: ${locationName.textContent}`);
 
+    displaySection.appendChild(displaySectionLocation);
     displaySection.appendChild(displaySectionContent);
     container.appendChild(displaySection);
 }
 
-export function gridMaker(){
+export async function gridMaker(){
+    await displaySectionMaker();
     let container = document.querySelector(".display-section-content");
     container.innerHTML='';
 
