@@ -27,6 +27,7 @@ export function displaySectionMaker(){
 
 export function gridMaker(){
     let container = document.querySelector(".display-section-content");
+    container.innerHTML='';
 
     //GET WEATHER AS AN ARRAY SO IT'S EASIER TO LOOP THROUGH AND CREATE GRIDS FOR EACH DAY
     let weatherData = getWeather();
@@ -210,7 +211,7 @@ function temperatureConverter(element, temp){
 
     if (element.classList.contains("f")){ //If element is in Fahrenheit
         //Convert to Celcius
-        resultTemp = ((fahrenheit - 32) * (5/9)).toFixed(2);
+        resultTemp = ((fahrenheit - 32) * (5/9)).toFixed(1);
         console.log(`Result Temp: ${resultTemp}`)
         //Convert .f to .c for next click
         element.classList.remove('f');
