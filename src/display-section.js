@@ -19,6 +19,11 @@ export async function loadData(location){
 
 function showLoading(){
     let container = document.querySelector(".main-content");
+    let displaySection = document.querySelector('.display-section');
+
+    if(displaySection){
+        displaySection.remove();
+    }
 
     let loadingSection = document.createElement('div');
     loadingSection.classList.add('loading-section');
@@ -36,7 +41,7 @@ function showLoading(){
     loadingSectionIcon.classList.add('loading-section-icon');
 
     let loadingSpinner = document.createElement('div');
-    spinner.classList.add('loading-spinner');
+    loadingSpinner.classList.add('loading-spinner');
 
     contentSection.appendChild(loadingSectionIcon);
     contentSection.appendChild(loadingSectionLegend);

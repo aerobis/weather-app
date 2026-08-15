@@ -2,6 +2,7 @@
 
 import './style.css';
 import {selectSectionMaker} from "./select-section.js";
+import {loadData} from "./display-section.js";
 import {fetchWeather} from "./fetch-weather.js";
 import {displaySectionMaker} from "./display-section.js";
 import {gridMaker} from "./display-section.js";
@@ -17,9 +18,9 @@ document.addEventListener('DOMContentLoaded', ()=>{
             if(location == null || location == undefined || location == ''){
                 return;
             }           
-            await fetchWeather(location);
-            displaySectionMaker();
-            gridMaker();
+            // await fetchWeather(location);
+            // gridMaker();
+            loadData(location);
         }
     }
 
