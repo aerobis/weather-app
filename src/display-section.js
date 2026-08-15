@@ -6,15 +6,15 @@ import {getLocation} from "./state.js";
 export async function loadData(location){
     showLoading();
 
-    try{
-        await fetchWeather(location);
-        // displaySectionMaker();
-        gridMaker();
-    }catch(error){
-        showErrorState(error);
-    }finally{
-        hideLoading();
-    }
+    // try{
+    //     await fetchWeather(location);
+    //     // displaySectionMaker();
+    //     gridMaker();
+    // }catch(error){
+    //     showErrorState(error);
+    // }finally{
+    //     hideLoading();
+    // }
 }
 
 function showLoading(){
@@ -36,9 +36,9 @@ function showLoading(){
     loadingSectionLegend.textContent += "LOADING";
 
     let loadingSectionIcon = document.createElement('i');
-    loadingSectionIcon.classList.add('fa-regular');
+    loadingSectionIcon.classList.add('fa-solid');
     loadingSectionIcon.classList.add('fa-cloud');
-    loadingSectionIcon.classList.add('loading-section-icon');
+    // loadingSectionIcon.classList.add('loading-section-icon');
 
     let loadingSpinner = document.createElement('div');
     loadingSpinner.classList.add('loading-spinner');
