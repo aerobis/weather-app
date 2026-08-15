@@ -71,7 +71,30 @@ body{
     justify-content: center;
     align-items: center;
     font-size: var(--font-size-large);
+    margin-bottom: 20px;
+}
+
+#location-input, #search-button{
     font-family: var(--normal-font);
+    background-color: var(--secondary-color);
+    color: var(--primary-color);
+    padding: 5px;
+}
+
+.select-section-content > input{
+    border: 1px solid var(--secondary-color);
+    border-radius: 3px;
+    padding: 5px;
+}
+
+#search-button{
+    /* background-color: var(--secondary-color); */
+    border: 1px solid var(--secondary-color);
+    border-left: 1px solid black;
+}
+
+#search-button:hover{
+    cursor: pointer;
 }
 
 /* .select-section-content>input{
@@ -87,7 +110,7 @@ body{
 .location-name{
     display: flex;
     justify-content: center;
-    font-size: var(--font-size-large);
+    font-size: 36px;
     color: var(--primary-color);
 }
 
