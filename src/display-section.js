@@ -1,6 +1,56 @@
 // import { CodeGenerationResults } from "webpack";
+import { fetchWeather } from "./fetch-weather.js";
 import {getWeather} from "./state.js";
 import {getLocation} from "./state.js";
+
+export async function loadData(location){
+    showLoading();
+
+    try{
+        await fetchWeather(location);
+        // displaySectionMaker();
+        gridMaker();
+    }catch(error){
+        showErrorState(error);
+    }finally{
+        hideLoading();
+    }
+}
+
+function showLoading(){
+    let container = document.querySelector(".main-content");
+
+    let loadingSection = document.createElement('div');
+    loadingSection.classList.add('loading-section');
+
+    let contentSection = document.createElement('div');
+    contentSection.classList.add('loading-section-content');
+
+    let loadingSectionLegend = document.createElement('h1');
+    loadingSectionLegend.classList.add('loading-section-legend');
+    loadingSectionLegend.textContent += "LOADING";
+
+    let loadingSectionIcon = document.createElement('i');
+    loadingSectionIcon.classList.add('fa-regular');
+    loadingSectionIcon.classList.add('fa-cloud');
+    loadingSectionIcon.classList.add('loading-section-icon');
+
+    let loadingSpinner = document.createElement('div');
+    spinner.classList.add('loading-spinner');
+
+    contentSection.appendChild(loadingSectionIcon);
+    contentSection.appendChild(loadingSectionLegend);
+    loadingSection.appendChild(contentSection);
+    loadingSection.appendChild(loadingSpinner);
+    container.appendChild(loadingSection);
+}
+
+function hideLoading(){
+    let loadingSection = document.querySelector('.loading-section');
+    if(loadingSection){
+        loadingSection.remove();
+    }
+}
 
 export function displaySectionMaker(){
     let container = document.querySelector(".main-content");

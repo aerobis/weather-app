@@ -18,6 +18,7 @@ export async function fetchWeather(location){
         });
 
 		setWeather(forecast);
+        return forecast;
 	
         console.log(forecast);
     }catch(error){
