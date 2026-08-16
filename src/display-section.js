@@ -5,16 +5,15 @@ import {getLocation} from "./state.js";
 
 export async function loadData(location){
     showLoading();
-
-    // try{
-    //     await fetchWeather(location);
-    //     // displaySectionMaker();
-    //     gridMaker();
-    // }catch(error){
-    //     showErrorState(error);
-    // }finally{
-    //     hideLoading();
-    // }
+    try{
+        await fetchWeather(location);
+        // displaySectionMaker();
+        gridMaker();
+    }catch(error){
+        showErrorState(error);
+    }finally{
+        hideLoading();
+    }
 }
 
 function showLoading(){
